@@ -1,0 +1,57 @@
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+        <a class="navbarbrand ps-3" href="#home-sec">I AM MORE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+            <ul class="navbar-nav ">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/#skill-sec">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#service-sec">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#aboutme-sec">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#project-sec">Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/post')}}">Post</a>
+                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="#contact-sec">Contact</a>
+                </li> --}}
+                @if(Auth::check())
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown">
+                        <span>{{strToUpper(Auth::user()->name)}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">User Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"  onclick="event.preventDefault();if(confirm('Are you sure you want to logout?')){document.getElementById('logout-form').submit();}" class="dropdown-item">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            class="d-none">
+                            @csrf
+                        </form>
+                        </li>
+                    </ul>
+                </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/login')}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/register')}}">Register</a>
+                </li>
+                @endif
+            </ul>
+        </div>
+    </nav>
