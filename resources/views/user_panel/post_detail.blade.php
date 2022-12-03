@@ -75,6 +75,10 @@
                         <i class="far fa-comment"></i>
                         comment
                     </button>
+                    <button type="button" class="btn btn-sm btn-info" data-toggle="collapse" data-target="">
+                        <i class="far fa-comment"></i>
+                        comment
+                    </button>
                 </form>
             </div>
 
