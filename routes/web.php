@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\StudentCountController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\LikeDislikeController;
+use App\Http\Controllers\CommentController;
 
 
 //user
@@ -19,6 +20,9 @@ Route::get('/post/{id}/details',[UserController::class,'postsDetailsIndex']);
     //like and dislike
     Route::post('/post/like/{postId}',[LikeDislikeController::class,'like']);
     Route::post('/post/dislike/{postId}',[LikeDislikeController::class,'dislike']);
+
+    //Comment
+    Route::post('/post/comment/{postId}',[CommentController::class,'comment']);
 
 //admin
 Route::group(['prefix' => 'admin','middleware' => ['auth','isAdmin']],function(){
@@ -50,6 +54,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','isAdmin']],function()
 
     //Post
     Route::resource('posts', PostController::class);
+    //Route::get('posts', PostController::class);
+     Route::post('/comment/{commentId}/show_hide', [App\Http\Controllers\admin\PostController::class,'showHideComment']);
 });
 
 

@@ -54,15 +54,21 @@
 
                                 </td>
                                 <td>{{$post->title}}</td>
-                                <td>{{$post->content}}</td>
+                                <td>
+                                    <p>{{Str::limit($post->content,700, '...')}}</p>
+                                </td>
+                                {{-- <td>{{$post->content}}</td> --}}
                                 <td>
 
                                     {{-- {{url('admin/project/'.$projects->id)}} --}}
                                     {{-- {{route('projects.edit',$project->id)}} --}}
                                     <form action="{{url('admin/posts/'.$post->id)}}" method="POST">
                                         @csrf @method('DELETE')
-                                        <a href="{{url('admin/posts/'.$post->id.'/edit')}}" class="btn btn-info btn-sm"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
-                                        <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you wanted to delete?')"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                                        <a href="{{url('admin/posts/'.$post->id.'/edit')}}" class="btn btn-info btn-sm mt-2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                        <button class="btn btn-danger btn-sm mt-2" type="submit" onclick="return confirm('Are you sure you wanted to delete?')"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                                        <a href="{{url('admin/posts/'.$post->id)}}" class="btn btn-info btn-sm mt-2">
+                                            <i class="fa fa-comment"></i>Comments
+                                        </a>
 
                                     </form>
                                 </td>

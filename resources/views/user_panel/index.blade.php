@@ -82,6 +82,30 @@
         </div>
     </section>
 
+    {{-- latest Post Section --}}
+    <div class="latest-post ">
+        <h2 class="text-center pt-2">Latest Post</h2>
+        <hr>
+            <div class="row card-container">
+                @foreach ($post as $post )
+
+                <div class="col-md-4">
+                    <a href="">
+                        <div class="container mt-3" >
+                            <img src="{{asset('storage/post-images/'.$post->image)}}" alt="" class="img-fluid pb-3" alt="" style=" width:100%; height:300px;
+                        }">
+                        </div>
+                        <small >{{ date('d-M-Y',strtotime($post->created_at))}}</small><br>
+                        <h4>{{$post->title}}</h4>
+                        <p>{{Str::limit($post->content,400, '...')}}</p>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+    </div>
+
+
+
     <!--About Section-->
     <section id="aboutme-sec">
         <h2>About Me</h2>
@@ -106,7 +130,7 @@
     </section>
 
     <!--Projects Section-->
-    <div class="container">
+
             <section id="project-sec" >
                 <h2>My Recent Projects</h2>
                 <div class="brand">
@@ -116,38 +140,26 @@
                     <div class="Mini-Project">Mini-Project</div>
                 </div>
 
-                {{-- <div class="row row-cols-1 row-cols-lg-4"> --}}
-                    {{-- <div class="col-12 col-md-6 col-lg-3"> --}}
-                        <div class="row  row-cols-sm-2 row-cols-md-3 row-cols-lg-4 p-3">
-                            @foreach ($projects as $projects )
-                            <div class="col col-md-4 ">
-                            {{-- <div class="col-mb-3"> --}}
-                                <div class="card">
-                                    <img src="img/myimg.jpg" class="card-img-top" alt="...">
+                {{-- <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4"> --}}
+                    <div class="row card-post g-2">
+                    @foreach ($projects as $projects )
+                        <div class="col-md-4 ">
+                            <div class="card">
+                                <img src="img/myimg.jpg" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title">{{$projects->name}}</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                                             card's content.</p>
                                         <a href="{{$projects->url}}" class="btn btn-primary">View more</a>
                                     </div>
-                                </div>
                             </div>
-                            @endforeach
-                        {{-- </div>
-                    </div> --}}
+                        </div>
+                    @endforeach
                 </div>
 
             </section>
-        </div>
-            {{-- <div class="card" style="width: 18rem;">
-                <img src="img/myimg.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{$projects->name}}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="{{$projects->url}}" class="btn btn-primary">View more</a>
-                </div>
-            </div> --}}
+
+
 
     <!--Contact Section-->
     <section id="contact-sec">

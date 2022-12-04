@@ -30,14 +30,28 @@ class LoginController extends Controller
      */
      //protected $redirectTo = RouteServiceProvider::HOME;
 
+    //login in ma lote pe Post ko twar yin di ko lr mal
+    //pee yin Post Detail page ko pyan twar mal
+    public function showLoginForm(){
+        $previousURL = url()->previous();
+        $baseURL = url()->to('/');
+
+        if($previousURL != $baseURL.'/login'){
+            session()->put('url.intended',$previousURL);
+        }
+        return view('auth.login');
+    }
+
+
+
     protected function authenticated(Request $request, $user){
         if(Auth::user()->status == 'admin'){
             return redirect('/admin/dashboard');
         }else{
-            return redirect('/');
+            $this->showLoginForm();
         }
     }
-    
+
 
 
     /**

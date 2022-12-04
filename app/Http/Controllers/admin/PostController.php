@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Comment;
+
 //for update image
 use Illuminate\Support\Facades\File;
 
@@ -72,7 +74,22 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $comments = Comment::where('post_id',$id)->get();
+        return view('admin_panel.post.comment',compact('comments'));
+    }
+
+    public function showHideComment($id){
+        $comment = Comment::findOrFail($id);
+        if($comment->status == 'show'){
+            $comment->update([
+                'status' => 'hide',
+            ]);
+        }else{
+            $comment->update([
+                'status' => 'show',
+            ]);
+        }
+        return back()->with('successMsg','Comment status changed successfully');
     }
 
     /**

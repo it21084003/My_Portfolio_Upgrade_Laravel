@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group pb-2">
                         <label for="" class="pb-1" >Content</label>
-                        <textarea name="content" id="" rows="5" class="form-control" @error('content')
+                        <textarea name="content" id="" cols="10" rows="5" class="form-control" @error('content')
                         is-invalid @enderror placeholder="Post Content">{{old('content') ?? $post->content}}
                         </textarea>
                         @error('content')

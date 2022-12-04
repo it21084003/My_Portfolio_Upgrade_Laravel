@@ -49,7 +49,7 @@
                             <i class="far fa-thumbs-down"></i> {{$dislikes->count()}}
                         </span>
                         <span class="pe-3 ">
-                            <i class="far fa-comment"></i>comments</span>
+                            <i class="far fa-comment"></i> {{$comment->count()}}</span>
                     </div>
                     <button type="submit" formaction="{{url('/post/like/'.$post->id)}}" class="btn btn-sm btn-success"
                         @if($likeStatus)
@@ -71,15 +71,36 @@
                         <i class="far fa-thumbs-down"></i>
                         dislike
                     </button>
-                    <button type="button" class="btn btn-sm btn-info" data-toggle="collapse" data-target="">
-                        <i class="far fa-comment"></i>
-                        comment
-                    </button>
-                    <button type="button" class="btn btn-sm btn-info" data-toggle="collapse" data-target="">
+                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="collapse" data-bs-target="#commentId">
                         <i class="far fa-comment"></i>
                         comment
                     </button>
                 </form>
+                    <div class="collapse comment-section mt-2" id="commentId">
+                        <form action="{{url('/post/comment/'.$post->id)}}" method="POST">
+                            @csrf
+                            <textarea name="text" id="" cols="30" rows="5" placeholder="Comment" required></textarea><br>
+                            <button type="submit" class="btn btn-sm btn-info">
+                                <i class="far fa-comment"></i>
+                                Submit
+                            </button>
+                        </form>
+                        <br>
+                    @foreach ($comment as $comments)
+                    <div>
+                        {{-- {{asset('storage/post-images/'.$post->image)}} --}}
+                        <img src="{{asset('/img/myimg.jpg')}}" alt="">
+                        <strong>{{$comments->user->name}}</strong>
+                    </div>
+                    <div class="message-box my-2">
+                        {{$comments->text}}
+                    </div>
+                    @endforeach
+                    </div>
+
+
+
+                <br>
             </div>
 
         </div>
