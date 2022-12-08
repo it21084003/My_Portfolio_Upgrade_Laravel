@@ -30,7 +30,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Category</th>
                                 <th>Image</th>
                                 <th>Title</th>
@@ -39,9 +39,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $post )
+                            @foreach ($posts as $index => $post )
                             <tr>
-                                <td>{{$post->id}}</td>
+                                {{-- <td>{{$post->id}}</td> --}}
+                                <td>{{$index + 1}}</td>
                                 {{-- notice category --}}
                                 <td>{{$post->category->name}}</td>
                                 <td>
@@ -55,7 +56,7 @@
                                 </td>
                                 <td>{{$post->title}}</td>
                                 <td>
-                                    <p>{{Str::limit($post->content,700, '...')}}</p>
+                                    <p>{{Str::limit($post->content,300, '...')}}</p>
                                 </td>
                                 {{-- <td>{{$post->content}}</td> --}}
                                 <td>
@@ -78,7 +79,7 @@
                     </table>
                 </div>
                 <div class="card-fotter">
-                    {{-- {{$categories->links()}} --}}
+                    {{-- {{$post->links()}} --}}
                 </div>
             </div>
 

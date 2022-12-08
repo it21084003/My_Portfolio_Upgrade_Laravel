@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <div class="card-title">Create</div>
                 </div>
-                <form action="{{route('projects.store')}}" method="POST">
+                <form action="{{route('projects.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -18,6 +18,15 @@
                             is-invalid
                         @enderror">
                         @error('name')
+                            <span class="text-danger"><small>{{($message)}}</small></span>
+                        @enderror
+                    </div>
+                    <div class="form-group pb-2">
+                        <label for="" class="pb-1" >Image</label>
+                        <input type="file" name="image"  value="{{old('image')}}" class="form-control @error('image')
+                            is-invalid
+                        @enderror">
+                        @error('image')
                             <span class="text-danger"><small>{{($message)}}</small></span>
                         @enderror
                     </div>

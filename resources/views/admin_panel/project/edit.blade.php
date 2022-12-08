@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <div class="card-title"> Project Edit</div>
                 </div>
-                <form action="{{ route('projects.update',$project->id)}}" method="POST">
+                <form action="{{ route('projects.update',$project->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf @method('PATCH')
                 <div class="card-body">
                     <div class="form-group">
@@ -18,6 +18,16 @@
                             is-invalid
                         @enderror">
                         @error('name')
+                            <span class="text-danger"><small>{{($message)}}</small></span>
+                        @enderror
+                    </div>
+                    <div class="form-group pb-2">
+                        <label for="" class="pb-1" >Image</label>
+                        <input type="file" name="image"  value="{{old('image')}}" class="form-control mb-2 @error('name')
+                            is-invalid
+                        @enderror">
+                        <img src="{{asset('storage/project-images/'.$project->image)}}" alt="" style="width: 100px; height:100px; border:1px solid black" >
+                        @error('image')
                             <span class="text-danger"><small>{{($message)}}</small></span>
                         @enderror
                     </div>

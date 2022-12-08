@@ -86,18 +86,20 @@
     <div class="latest-post ">
         <h2 class="text-center pt-2">Latest Post</h2>
         <hr>
-            <div class="row card-container">
+            <div class="row card-container  g-1">
                 @foreach ($post as $post )
 
                 <div class="col-md-4">
-                    <a href="">
+                    <a href="{{url('/post/'.$post->id.'/details')}}">
                         <div class="container mt-3" >
                             <img src="{{asset('storage/post-images/'.$post->image)}}" alt="" class="img-fluid pb-3" alt="" style=" width:100%; height:300px;
                         }">
                         </div>
+                        <div class="ps-3">
                         <small >{{ date('d-M-Y',strtotime($post->created_at))}}</small><br>
                         <h4>{{$post->title}}</h4>
                         <p>{{Str::limit($post->content,400, '...')}}</p>
+                        </div>
                     </a>
                 </div>
                 @endforeach
@@ -132,20 +134,23 @@
     <!--Projects Section-->
 
             <section id="project-sec" >
-                <h2>My Recent Projects</h2>
+                <h2 class="pt-5">My Recent Projects</h2>
                 <div class="brand">
-                    <div class="ALl active">All({{$projects->count()}})<span>/</span></div>
+                    <div class="ALl active">All
+                        @if ($projects->count() > 0)
+                            ({{$projects->count()}})
+                        @endif<span>/</span></div>
                     <div class="Real-World">Real-World<span>/</span></div>
                     <div class="Static">Static<span>/</span></div>
                     <div class="Mini-Project">Mini-Project</div>
                 </div>
 
                 {{-- <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4"> --}}
-                    <div class="row card-post g-2">
+                    <div class="row card-post g-2 pb-5 ">
                     @foreach ($projects as $projects )
-                        <div class="col-md-4 ">
+                        <div class="col-md-4  ">
                             <div class="card">
-                                <img src="img/myimg.jpg" class="card-img-top" alt="...">
+                                <img src="{{asset('storage/project-images/'.$projects->image)}}" class="card-img-top" alt="..." style="height: 280px;">
                                     <div class="card-body">
                                         <h5 class="card-title">{{$projects->name}}</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -183,13 +188,20 @@
                     <span>08096452889</span>
                 </div>
             </div>
-            <div class="contact2">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Subject">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-                <button type="button" class="btn btn-primary">Send Message</button>
-            </div>
+            {{-- /post/'.$post->id.'/details') --}}
+            {{-- '/post/comment/'.$post->id) --}}
+            {{-- /post/comment/'.$post->id --}}
+            {{-- {{url('admin/users/'.$user->id.'/delete')}} --}}
+            <form action="{{url('/message')}}" method="POST">
+                @csrf
+                <div class="contact2">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="text" name="subject" placeholder="Subject" required>
+                    <textarea name="message" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+            </form>
         </div>
     </section>
     {{-- this is StudentCount --}}

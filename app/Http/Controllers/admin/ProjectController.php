@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 
+//for update image
+use Illuminate\Support\Facades\File;
+
 class ProjectController extends Controller
 {
     /**
@@ -39,10 +42,18 @@ class ProjectController extends Controller
     {
         $request -> validate([
             'name' => 'required',
+            'image' => 'required|image',
             'url' => 'required',
         ]);
+        //image upload method
+        $image = $request->image;
+        $imageName = uniqid().'_'.$image->getClientOriginalName();
+
+        $image->storeAs('public/project-images',$imageName);
+
         Project::create([
             'name'=> $request->name,
+            'image'=> $imageName,
             'url'=> $request->url,
         ]);
         return redirect()->route('projects.index')->with('successMsg','You have Successfuly Created');
@@ -80,16 +91,39 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request -> validate([
             'name' => 'required',
+            'image' => 'nullable|image',
             'url' => 'required',
         ]);
         $project = Project::find($id);
-        $project->update([
-            'name' => $request->name,
-            'url' => $request->url
-        ]);
+
+        if($request->hasFile('image')){
+            // dd('yes');
+            //image update
+            //delete old image
+
+            $projectImage = $project->image;
+            File::delete('storage/project-images/'.$projectImage);
+
+            //image upload method
+            $image = $request->image;
+            $imageName = uniqid().'_'. $image->getClientOriginalName();
+
+            $image->storeAs('public/project-images',$imageName);
+
+            $project->update([
+                'name' => $request->name,
+                'image' => $imageName,
+                'url' => $request->url
+            ]);
+        }else{
+            $project->update([
+                'name' => $request->name,
+                'url' => $request->url
+            ]);
+            // dd('no');
+        }
         return redirect()->route('projects.index')->with('successMsg','You have Successfuly Updated');
     }
 
@@ -101,6 +135,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        $project = Project::find($id);
+        //delete old image
+        $projectImage = $project->image;
+        File::delete('storage/project-images/'.$projectImage);
+
         Project::find($id)->delete();
         return redirect()->route('projects.index')->with('successMsg','You have Successfuly Deleted');
     }

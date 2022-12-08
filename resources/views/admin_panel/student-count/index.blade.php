@@ -44,6 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($student)
                             <tr>
                                 <td>{{$student->count}}</td>
                                 <td>
@@ -54,7 +55,7 @@
                                         <div class="input-group">
                                             <input type="number" name="count" class="form-control @error('count')
                                                 is-invalid
-                                            @enderror" placeholder="Enter Student Count" style="border-radius: 4px 0px 0px 4px;">
+                                            @enderror" required placeholder="Enter Student Count" style="border-radius: 4px 0px 0px 4px;">
                                             <button type="submit" class="btn btn-primary" style="border-radius: 0px 4px 4px 0px;"><i class="fa-sharp fa-solid fa-plus-circle"></i> Add</button>
                                         </div>
                                         @error('count')
@@ -63,6 +64,7 @@
                                     </form>
                                 </td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

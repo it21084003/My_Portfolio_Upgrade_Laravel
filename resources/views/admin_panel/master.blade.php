@@ -13,16 +13,24 @@
     .sidenavbar a{
         text-decoration: none;
     }
+    .container{
+        height: 100%;
+    }
+    .sidenavbar{
+        height: auto;
+    }
+
+
 
     </style>
 </head>
 
 <body>
 
-    <div class="container-fluid">
-        <div class="row g-0">
+    <div class="container-fluid ">
+        <div class="row g-0 ">
             <!-- side bar start -->
-            <nav class="col-2 bg-dark p-3 sidenavbar">
+            <nav class=" col-2 bg-dark p-3 sidenavbar ">
                 <a href="{{url('admin/dashboard')}}">
                     <h1 class="h4 py-2 text-center text-white">
                         <i class="fa-solid fa-person-circle-check"></i>
@@ -54,10 +62,15 @@
                         <span class="d-none d-lg-inline">Post</span>
                     </a>
                     <a href="{{route('category.index')}}">
-                        <i class="fa-solid fa-list"></i>
+                        <i class="fa-solid fa-list pb-3"></i>
                         <span class="d-none d-lg-inline">Category</span>
                     </a>
+                    <a href="#">
+                        <i class="fa-solid fa-message pb-3"></i>
+                        <span class="d-none d-lg-inline">Message</span>
+                    </a>
                 </div>
+
             </nav>
                 <!-- side bar end -->
             <main class="col-10 bg-light">

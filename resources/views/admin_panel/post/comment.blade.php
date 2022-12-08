@@ -24,6 +24,9 @@
                     <table class="table table-bordered table-hover">
 
                         <tbody>
+                            @if ($comments->count() < 1)
+                                No Comment
+                            @else
                             @foreach ($comments as $index => $comment )
                             <tr>
                                 <td>{{$index + 1}}</td>
@@ -41,6 +44,7 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

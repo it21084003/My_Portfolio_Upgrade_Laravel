@@ -32,15 +32,26 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>URL</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($projects as $projects )
+                            @foreach ($projects as $index => $projects )
                             <tr>
-                                <td>{{$projects->id}}</td>
+                                {{-- <td>{{$projects->id}}</td> --}}
+                                <td>{{$index + 1}}</td>
                                 <td>{{$projects->name}}</td>
+                                <td>
+                                    {{-- link connect storage ko public to --}}
+                                    {{-- php artisan storage:link --}}
+
+                                    <div class="box">
+                                        <img src="{{asset('storage/project-images/'.$projects->image)}}" alt="" width="100px" height="100px" >
+                                    </div>
+
+                                </td>
                                 <td>{{$projects->url}}</td>
                                 <td>
 

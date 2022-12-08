@@ -19,16 +19,35 @@ class UserController extends Controller
         $skills = Skill::all();
         $projects = Project::all();
         $studentCount = StudentCount::find(1);
-        $post = Post::all();
+        $post = Post::latest()->take(6)->get();
 
         // dd($projects);
        // return $skills;
         return view('user_panel.index',compact('skills','projects','studentCount','post'));
     }
 
+    public function search(Request $request){
+        $categories = Category::all();
+        $searchData = $request->search_data;
+        //like ka nae nae tu nay yin
+        $posts = Post::where('title','like','%'.$searchData.'%')
+            ->orWhere('content','like','%'.$searchData.'%')//content nae search
+            ->orWhereHas('category',function($category) use($searchData){
+                $category->where('name','like','%'.$searchData.'%');
+            })//categories nae search
+            ->paginate(10);
+        return view('user_panel.posts',compact('categories','posts'));
+    }
+
+    public function searchByCategory($catId){
+        $categories = Category::all();
+        $posts = Post::where('category_id','=',$catId)->paginate(10);
+        return view('user_panel.posts',compact('categories','posts'));
+    }
+
     public function postsindex(){
         $categories = Category::all();
-        $posts = Post::all();
+        $posts = Post::latest()->paginate(10);
         return view('user_panel.posts',compact('categories','posts'));
     }
     public function postsDetailsIndex($id){

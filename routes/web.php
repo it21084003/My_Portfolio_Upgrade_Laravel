@@ -10,12 +10,15 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\LikeDislikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MessagesController;
 
 
 //user
 Route::get('/',[UserController::class,'index']);
 Route::get('/post',[UserController::class,'postsindex']);
 Route::get('/post/{id}/details',[UserController::class,'postsDetailsIndex']);
+Route::get('/search_post',[UserController::class,'search']);
+Route::get('/search_post_by_cartegory/{catId}',[UserController::class,'searchByCategory']);
 
     //like and dislike
     Route::post('/post/like/{postId}',[LikeDislikeController::class,'like']);
@@ -23,6 +26,9 @@ Route::get('/post/{id}/details',[UserController::class,'postsDetailsIndex']);
 
     //Comment
     Route::post('/post/comment/{postId}',[CommentController::class,'comment']);
+
+    //Message
+    Route::get('/message',[MessagesController::class,'message'])->name('message');
 
 //admin
 Route::group(['prefix' => 'admin','middleware' => ['auth','isAdmin']],function(){
@@ -55,7 +61,12 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','isAdmin']],function()
     //Post
     Route::resource('posts', PostController::class);
     //Route::get('posts', PostController::class);
-     Route::post('/comment/{commentId}/show_hide', [App\Http\Controllers\admin\PostController::class,'showHideComment']);
+    Route::post('/comment/{commentId}/show_hide', [App\Http\Controllers\admin\PostController::class,'showHideComment']);
+
+    //Message
+    Route::post('messages',[App\Http\Controllers\admin\MessagesController::class,'index'])->name('message.index');
+
+
 });
 
 

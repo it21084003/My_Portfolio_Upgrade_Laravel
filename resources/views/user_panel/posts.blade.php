@@ -24,9 +24,10 @@
 
         <div class="col-md-3 p-3" style="background-color: #e8e9ea;">
             <div class="side-bar">
-                <form action="">
+                <form action="{{url('/search_post')}}" method="GET">
+                    @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" name="search_data" class="form-control" placeholder="Search...">
                         <button class="btn btn-success"><i class="fa-solid fa-magnifying-glass-plus"></i> Search</button>
                     </div>
                 </form>
@@ -35,7 +36,7 @@
                 <ul>
                     @foreach ($categories as $categories)
                     <li class="pb-2">
-                        <a href="">{{$categories->name}}</a>
+                        <a href="{{url('/search_post_by_cartegory/'.$categories->id)}}">{{$categories->name}}</a>
                     </li>
                     @endforeach
 
@@ -47,7 +48,7 @@
             <img src="img/ountain.jpg" class="img-fluid" alt="">
 
         </div> --}}
-        <div class="col-md-9   pt-3" style=" background-color: #F8F9FA;">
+        <div class="col-md-9 pt-3" style=" background-color: #F8F9FA;">
         @foreach ($posts as $post )
             <div class="col">
             <img src="{{asset('storage/post-images/'.$post->image)}}" class="img-fluid pb-3" alt="" style=" width:50%; height:300px;

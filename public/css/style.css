@@ -286,11 +286,11 @@ nav a{
 /* .card-container{
     margin: 50px;
 } */
-/* #project-sec {
-    width: 100%;
+#project-sec {
+    /* width: 100%; */
     background-color: #F8F9FA;
-    padding: 40px 0;
-} */
+    /* padding: 40px 0; */
+}
 
 #project-sec h2 {
     text-align: center;
@@ -387,7 +387,7 @@ nav a{
 }
 
 .contact2 input[type='text'] {
-    background-color: #fff;
+    /* background-color: #8e8e8e; */
     outline: none;
     border: none;
     border-radius: 7px;
@@ -425,7 +425,7 @@ textarea {
 
 @media(max-width:600px) {
     .contact2 {
-        background-color: #fff;
+        background-color: #F8F9FA;
         border-radius: none;
         margin: auto;
         width: auto;;
@@ -433,9 +433,9 @@ textarea {
     }
     .contact2 input[type='text'],
     textarea {
-        background-color: #F8F9FA;
+        background-color: #fff;
     }
-}
+
 
 
 /* ====Footer==== */
