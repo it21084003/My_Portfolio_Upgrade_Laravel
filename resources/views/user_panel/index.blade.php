@@ -188,12 +188,8 @@
                     <span>08096452889</span>
                 </div>
             </div>
-            {{-- /post/'.$post->id.'/details') --}}
-            {{-- '/post/comment/'.$post->id) --}}
-            {{-- /post/comment/'.$post->id --}}
-            {{-- {{url('admin/users/'.$user->id.'/delete')}} --}}
-            <form action="{{url('/message')}}" method="POST">
-                @csrf
+            <form action="#" method="POST">
+                {{-- @csrf --}}
                 <div class="contact2">
                     <input type="text" name="name" placeholder="Name" required>
                     <input type="text" name="email" placeholder="Email" required>
